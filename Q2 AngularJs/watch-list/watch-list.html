@@ -1,0 +1,41 @@
+﻿<ion-view view-title="Most Watched TV Shows and Movies">
+    <ion-content class="padding">
+        <h1>Most watched list</h1>
+        
+        <select ng-model="type" ng-change="typeChange(type)">
+            <option value="movies">Movies</option>
+            <option value="shows">TV shows</option>
+        </select>
+
+        <select ng-model="genre" ng-options="item.slug as item.name for item in genreList" ng-change="genreChange(genre)"></select>
+            
+        <select ng-model="period" ng-change="periodChange(period)">
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+            <option value="all">All</option>
+        </select>
+            
+        <ul class="list">
+            <li class="item" ng-repeat="item in List">
+                
+                <b>Name:</b>{{item.movie.title || item.show.title}}
+                <br>
+                <b>Watched:</b>{{item.watcher_count}}
+                <br>
+                <b>Played:</b>{{item.play_count}}
+                <br>
+                
+                <button ng-if="!isWatched(item.movie.ids.imdb || item.show.ids.imdb)" class="button button-positive" ng-click="watched(item.movie.ids.imdb || item.show.ids.imdb)" >
+                    I’ve seen this
+                </button>
+                <button ng-if="isWatched(item.movie.ids.imdb || item.show.ids.imdb)" class="button button-positive" ng-click="watched(item.movie.ids.imdb || item.show.ids.imdb)" disabled>
+                    Watched
+                </button>
+
+            </li>
+        </ul>
+</ion-content>
+
+    
+</ion-view>>
